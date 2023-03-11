@@ -11,9 +11,8 @@ public class StatsService {
     }
 
     public static long averageSales(long[] sales) {
-        long average = summarySales(sales) / sales.length;
+        return summarySales(sales) / sales.length;
 
-        return average;
     }
 
     public static int maxSales(long[] sales) {
@@ -36,7 +35,7 @@ public class StatsService {
         for (long sale : sales) {
             // sales[minMonth] - продажи в месяце minMonth
             // sale - продажи в рассматриваемом месяце
-            if (sale < sales[minMonth]) {
+            if (sale <= sales[minMonth]) {
                 minMonth = month;
             }
             month = month + 1; // следующий рассматриваемый месяц имеет номер на 1 больше
@@ -47,9 +46,10 @@ public class StatsService {
 
     public static int underAverageSales(long[] sales) {
         int lowerThenAverage = 0;
+        long average = averageSales(sales);
 
         for (long sale : sales) {
-            if (sale < averageSales(sales)) {
+            if (sale < average) {
                 lowerThenAverage = lowerThenAverage + 1;
             }
         }
@@ -58,9 +58,10 @@ public class StatsService {
 
     public static int upperAverageSales(long[] sales) {
         int higherThenAverage = 0;
+        long average = averageSales(sales);
 
         for (long sale : sales) {
-            if (sale > averageSales(sales)) {
+            if (sale > average) {
                 higherThenAverage = higherThenAverage + 1;
             }
         }
